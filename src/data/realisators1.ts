@@ -1,0 +1,20 @@
+export const realisatorsList = [
+    "Dariush Mehrjui",
+    "Abbas Kiarostami",
+    "Jafar Panahi",
+    "Mohsen Makhmalbaf",
+    "Hana Makhmalbaf",
+    "Samira Makhmalbaf",
+    "Bahman Ghobadi",
+    "Marjane Satrapi",
+    "Asgar Farhadi",
+    "Akira Kurosawa",
+    "Kenji Mizoguchi",
+    "Hirokazu Kore-eda",
+    "Hayao Miyazaki",
+    "Bong Joon-ho",
+    "Luc Besson",
+    "Bertrand Tavernier",
+    "Jean-Luc Godard",
+    "Louis Delluc"
+];

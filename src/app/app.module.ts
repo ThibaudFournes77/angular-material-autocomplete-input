@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatOptionModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     MatFormFieldModule,
     MatInputModule,
+    MatOptionModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { realisatorsList } from 'src/data/realisators1';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   realisatorSearchForm!: FormGroup;
+  realisators!: String[];
+  realisatorName = new FormControl();
   searchedRealisator! : string;
 
   constructor(
@@ -15,6 +18,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.realisators = realisatorsList;
     this.realisatorSearchForm = this.formBuilder.group({
       realisatorName: [null, Validators.required]
     });
