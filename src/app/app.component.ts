@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 import { realisatorsList } from 'src/data/realisators1';
 
 @Component({
@@ -9,8 +11,9 @@ import { realisatorsList } from 'src/data/realisators1';
 })
 export class AppComponent implements OnInit {
   realisatorSearchForm!: FormGroup;
-  realisators!: String[];
+  realisators!: string[];
   realisatorName = new FormControl();
+  filteredRealisators!: Observable<string[]>;
   searchedRealisator! : string;
 
   constructor(
@@ -22,6 +25,17 @@ export class AppComponent implements OnInit {
     this.realisatorSearchForm = this.formBuilder.group({
       realisatorName: [null, Validators.required]
     });
+    this.filteredRealisators = this.realisatorName.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+  
+    return this.realisators.filter(realisator => realisator.toLowerCase().includes(filterValue));
   }
 
   onSubmit() {
