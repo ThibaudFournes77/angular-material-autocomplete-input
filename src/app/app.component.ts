@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { realisatorsList } from 'src/data/realisators1';
@@ -36,6 +37,10 @@ export class AppComponent implements OnInit {
     const filterValue = value.toLowerCase();
   
     return this.realisators.filter(realisator => realisator.toLowerCase().includes(filterValue));
+  }
+
+  onRealisatorSelected(option: MatOption) {
+    this.realisatorSearchForm.get('realisatorName')?.setValue(option.value);
   }
 
   onSubmit() {
