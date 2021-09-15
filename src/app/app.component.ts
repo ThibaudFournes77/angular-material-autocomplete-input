@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   realisatorSearchForm!: FormGroup;
   realisators!: IRealisator[];
   realisatorName = new FormControl();
-  filteredRealisators!: Observable<IRealisator[]>;
-  searchedRealisator! : IRealisator;
+  filteredRealisators!: Observable<IRealisator[] | undefined>;
+  searchedRealisator! : IRealisator | undefined;
 
   constructor(
     private formBuilder: FormBuilder
@@ -30,7 +30,15 @@ export class AppComponent implements OnInit {
     this.filteredRealisators = this.realisatorName.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(
+          value => {
+            if (typeof value === 'string') {
+              return this._filter(value);
+            } else {
+              return;
+            }
+          }
+        )
       );
   }
 
@@ -49,6 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    this.searchedRealisator = this.realisatorSearchForm.value.realisatorName;
+    const searchedRealisatorId = this.realisatorSearchForm.value.realisatorName
+    this.searchedRealisator = this.realisators.find(realisator => realisator.id === searchedRealisatorId);
   }
 }
