@@ -4,6 +4,7 @@ import { MatOption } from '@angular/material/core';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { realisatorsList } from 'src/data/realisators1';
+import { IRealisator } from './IRealisator';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,10 @@ import { realisatorsList } from 'src/data/realisators1';
 })
 export class AppComponent implements OnInit {
   realisatorSearchForm!: FormGroup;
-  realisators!: string[];
+  realisators!: IRealisator[];
   realisatorName = new FormControl();
-  filteredRealisators!: Observable<string[]>;
-  searchedRealisator! : string;
+  filteredRealisators!: Observable<IRealisator[]>;
+  searchedRealisator! : IRealisator;
 
   constructor(
     private formBuilder: FormBuilder
@@ -33,14 +34,18 @@ export class AppComponent implements OnInit {
       );
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): IRealisator[] {
     const filterValue = value.toLowerCase();
   
-    return this.realisators.filter(realisator => realisator.toLowerCase().includes(filterValue));
+    return this.realisators.filter(realisator => realisator.name.toLowerCase().includes(filterValue));
   }
 
   onRealisatorSelected(option: MatOption) {
-    this.realisatorSearchForm.get('realisatorName')?.setValue(option.value);
+    this.realisatorSearchForm.get('realisatorName')?.setValue(option.value.id);
+  }
+
+  displayFn(realisator: IRealisator) {
+    return realisator && realisator.name ? realisator.name : '';
   }
 
   onSubmit() {

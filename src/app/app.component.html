@@ -6,9 +6,9 @@
               matInput
               [formControl]="realisatorName"
               [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onRealisatorSelected($event.option)">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onRealisatorSelected($event.option)">
         <mat-option *ngFor="let realisator of filteredRealisators | async" [value]="realisator">
-          {{realisator}}
+          {{realisator.name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -16,7 +16,7 @@
       <mat-icon>search</mat-icon>
     </button>
   </form>
-  <div class="infos">
+  <div class="infos" *ngIf="searchedRealisator">
     <p>{{searchedRealisator}}</p>
   </div>
 </main>
